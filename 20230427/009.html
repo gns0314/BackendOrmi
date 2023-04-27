@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>구조적 가상 선택자</title>
+  </head>
+  <style>
+    li:first-child {
+      border: 5px solid green;
+    }
+    li:nth-child(3n + 1) {
+      border: 5px solid salmon;
+    }
+    li:not(.select) {
+      background: yellow;
+    }
+  </style>
+  <body>
+    <ol>
+      <li>첫번쨰</li>
+      <li>두번쨰</li>
+      <li class="select">세번쨰</li>
+      <li>네번쨰</li>
+      <li>다섯번쨰</li>
+    </ol>
+  </body>
+</html>

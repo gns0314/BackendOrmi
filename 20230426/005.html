@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form</title>
+</head>
+<body>
+    <form method="get" action="http://naver.com">
+        <fieldset>
+            <legend>제목</legend>
+            <div>
+              <label for="user-name">이름</label>
+              <input id="user-name" type="text" name="name" placeholder="이름">
+            </div>
+        </fieldset>
+       
+        <div>
+          <label for="user-age">나이</label>
+          <input id="user-age" type="number" name="age">
+        </div>
+        <button type="submit">submit</button>
+        <button type="button">submit</button>
+        <button type="reset">reset</button>
+      </form>
+</body>
+</html>
