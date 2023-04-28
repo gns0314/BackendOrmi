@@ -1,0 +1,55 @@
+.main-title {
+  margin: 0 0 10px 0;
+}
+.sub-title {
+  background-color: #eee;
+  border-bottom: 1px solid #ccc;
+  border-top: 2px solid black;
+  margin-bottom: 25px;
+}
+.title1 {
+  padding: 15px 0 8px 20px;
+}
+.info {
+  display: inline-flex;
+  margin-bottom: 5px;
+}
+.title-p {
+  border-right: 2px solid rgba(0, 0, 0, 0.299);
+  padding: 0 15px 0 15px;
+  margin: 10px;
+}
+
+.main-text {
+  display: flex;
+  align-items: self-start;
+  flex-direction: column;
+  padding-left: 25px;
+}
+
+.text-list {
+  margin-left: 40px;
+}
+
+h3 {
+  margin: 40px 0 10px 0;
+}
+
+ol {
+  padding: 0 0 0 40px;
+  margin: 0;
+}
+
+.main-text img {
+  margin-bottom: 15px;
+}
+
+ol {
+  margin-bottom: 20px;
+}
+
+a {
+  text-decoration-line: underline;
+  text-decoration-color: royalblue;
+  color: royalblue;
+}
