@@ -76,7 +76,7 @@ ul > li {
   color: white;
   border-radius: 4px;
   font-size: 15px;
-  font: sans-serif;
+  font-family: sans-serif;
   box-sizing: content-box;
   border-width: 0 0 3px 0;
   padding: 0;
@@ -90,4 +90,41 @@ ul > li {
 
 fieldset ul li div label {
   padding-right: 2px;
+}
+body {
+  min-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.main {
+  flex-grow: 1;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 80px;
+  border-bottom: 1px solid #ddd;
+}
+
+.header-click a,
+.header-click button {
+  padding: 10px 15px;
+  margin-left: 10px;
+  color: black;
+  text-decoration: none;
+}
+
+.header-click button {
+  font: inherit;
+  border: 0;
+  background: none;
+}
+
+.footer {
+  background: #eee;
+  text-align: center;
+  padding: 20px 0;
 }

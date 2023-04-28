@@ -1,10 +1,14 @@
 body,
 h1,
+h2,
 p,
 fieldset,
 ul {
   padding: 0;
   margin: 0;
+}
+a {
+  text-align: none;
 }
 /* layout */
 body {
@@ -15,6 +19,8 @@ body {
 }
 .main {
   flex-grow: 1;
+  width: 1000px;
+  margin: auto;
 }
 .header {
   display: flex;
@@ -24,7 +30,10 @@ body {
   height: 80px;
   border-bottom: 1px solid #ddd;
 }
-
+.header h1 a {
+  text-decoration: none;
+  color: black;
+}
 .header-click a,
 .header-click button {
   padding: 10px 15px;
@@ -45,7 +54,7 @@ body {
 
 /* 로그인 */
 .container {
-  width: 360px;
+  width: 400px;
   margin: 40px auto;
 }
 .title,
@@ -89,17 +98,96 @@ form > div {
   border: 0;
   margin-top: 23px;
 }
-
+.submit-button:disabled {
+  background-color: #ccc;
+}
 .field {
   border: 0;
+  margin: 20px 0;
 }
 .field ul {
   list-style: none;
   /* 2. flex */
   display: flex;
   flex-wrap: wrap;
+  gap: 8px 10px;
 }
 .field ul li {
   /* 1.가로배치 */
   /* display: inline-block; */
+}
+.field legend {
+  float: left;
+  width: 70px;
+}
+/* list */
+.list.table th {
+  text-align: center;
+}
+/* table */
+.table {
+  /* cell 사이 간격 삭제 */
+  border-spacing: 0;
+  /* 테두리 중첩 */
+  border-collapse: collapse;
+  table-layout: fixed;
+  border-top: 2px solid black;
+  border-bottom: 1px solid #ccc;
+  width: 1000px;
+  margin: auto;
+}
+.table th {
+  background-color: #eee;
+  padding: 0px;
+  width: 100px;
+}
+.table td,
+.table th {
+  padding: 10px;
+  /* border-top: 1px solid #ddd; */
+}
+.table td.nodata {
+  padding: 40px 0;
+}
+.table a {
+  display: block;
+  text-align: left;
+  padding: 8px;
+  font-weight: bold;
+
+  /* 말줄임 처리 */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* main 컨텐츠 */
+.main-title {
+  margin: 40px 0 10px;
+}
+.main-desc {
+  margin-bottom: 20px;
+}
+.main-desc strong {
+  color: royalblue;
+}
+.btn-group {
+  margin-top: 20px;
+  text-align: right;
+}
+.btn {
+  background-color: #eee;
+  width: 80px;
+  height: 32px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  /* display: inline-block;
+  text-align: center;s
+  line-height: 32px; */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+textarea {
+  width: 100%;
 }

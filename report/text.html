@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>글 작성</title>
+    <link rel="stylesheet" href="./text.css" />
+  </head>
+
+  <body>
+    <!-- header -->
+    <div class="header">
+      <h1><a href="index.html">HTML/CSS 실습</a></h1>
+      <div class="header-click">
+        <a href="login.html">로그인</a>
+        <a href="join.html">회원가입</a>
+        <button type="button">로그아웃</button>
+      </div>
+    </div>
+    <!-- // header -->
+
+    <div class="main">
+      <h2 class="main-title">글쓰기</h2>
+      <p class="main-desc">내용을 입력해주세요.</p>
+      <table class="table list">
+        <thead>
+          <tr>
+            <th>카테고리</th>
+            <td class="td1">
+              <select name="cate" id="cate">
+                <option value="reg" selected>일반</option>
+                <option value="code">코드</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <th><label for="tt">제목</label></th>
+            <td><input type="text" id="tt" /></td>
+          </tr>
+          <tr>
+            <th><label for="det">내용</label></th>
+            <td>
+              <textarea name="det" id="det" cols="15" rows="10"></textarea>
+            </td>
+          </tr>
+          <th><label for="file">파일첨부</label></th>
+            <td><input type="file"></input></td>
+        </thead>
+        <tbody>
+          <!-- 게시글이 없을때 / 검색한 게시글이 없을때 -->
+          <!-- <tr>
+            <td class="nodata" colspan="5">등록된 게시물이 없습니다.</td>
+          </tr> -->
+          <!-- 게시글이 있을때 -->
+        </tbody>
+      </table>
+
+      <div class="btn-group">
+        <a href="./index.html" class="btn">목록</a>
+        <input class="btn" type="reset">
+        <input class="btn"type="submit" value="작성">
+      </div>
+    </div>
+
+    <!-- footer -->
+    <p class="footer">Copyright 2023. Chilli All rights reserved.</p>
+    <!-- //footer -->
+  </body>
+</html>

@@ -1,0 +1,232 @@
+body,
+h1,
+h2,
+p,
+fieldset,
+ul {
+  padding: 0;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+/* layout */
+body {
+  min-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.main {
+  flex-grow: 1;
+  width: 1000px;
+  margin: auto;
+}
+
+/* header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 80px;
+  border-bottom: 1px solid #ddd;
+}
+.header h1 a {
+  color: black;
+}
+.header-click a,
+.header-click button {
+  padding: 10px 15px;
+  margin-left: 10px;
+  color: black;
+  text-decoration: none;
+}
+.header-click button {
+  font: inherit;
+  border: 0;
+  background: none;
+}
+.footer {
+  background: #eee;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 80px;
+}
+
+/* 로그인 */
+.container {
+  width: 360px;
+  margin: 40px auto;
+}
+.title,
+.description {
+  text-align: center;
+}
+.description {
+  margin: 20px 0;
+}
+.login > div {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+.label-width {
+  display: inline-block;
+  width: 70px;
+}
+[type="text"],
+[type="password"],
+[type="email"] {
+  width: 290px;
+  height: 32px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+[type="text"]:read-only {
+  background-color: #ccc;
+}
+.submit-button {
+  width: 100%;
+  height: 40px;
+  background-color: royalblue;
+  color: white;
+  border: 1px solid rgb(16, 41, 114);
+  border-width: 0 0 3px 0;
+  margin-top: 20px;
+  border-radius: 4px;
+  font: inherit;
+  box-sizing: content-box;
+  padding: 0;
+}
+.submit-button:active {
+  border: 0;
+  margin-top: 23px;
+}
+.submit-button:disabled {
+  background-color: #ccc;
+}
+
+/* 회원가입 */
+.field {
+  border: 0;
+  margin: 20px 0;
+}
+.field ul {
+  list-style: none;
+  /* 2. flex */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+}
+.field ul li {
+  /* 1.가로배치 */
+  /* display: inline-block; */
+}
+.field legend {
+  float: left;
+  width: 70px;
+}
+[type="checkbox"]:checked + label {
+  font-weight: bold;
+}
+/* [type="text"]::placeholder {
+  color: red;
+} */
+
+/* list */
+.list.table {
+  text-align: center;
+}
+.table {
+  /* cell 사이 간격 삭제 */
+  border-spacing: 0;
+  /* 테두리 중첩 */
+  border-collapse: collapse;
+  table-layout: fixed;
+  border-top: 2px solid black;
+  border-bottom: 1px solid #ddd;
+  width: 1000px;
+  margin: auto;
+}
+/* .table th,
+.table td {
+  border: 1px solid #ddd;
+} */
+.table th {
+  background-color: #eee;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+.table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+.table td.nodata {
+  padding: 40px 0;
+}
+
+.table a {
+  display: block;
+  text-align: left;
+  padding: 8px 0;
+  font-weight: bold;
+  /* 말줄임 처리 */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* main 내부 컨텐츠 */
+.main-title {
+  margin: 60px 0 10px 0;
+}
+.main-desc {
+  margin-bottom: 20px;
+}
+.main-desc strong {
+  color: royalblue;
+}
+.btn-group {
+  margin-top: 20px;
+  text-align: right;
+}
+.btn {
+  background-color: #eee;
+  width: 80px;
+  height: 32px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  /* 1번 방법 */
+  /* 
+  display: inline-block;
+  text-align: center;
+  line-height: 32px; */
+  /* 2번째 방법 */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  font: inherit;
+}
+
+/* 글쓰기 페이지 */
+.write textarea {
+  resize: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  height: 400px;
+}
+
+#board-title {
+  width: 100%;
+}
+
+.write select {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+  height: 32px;
+}
