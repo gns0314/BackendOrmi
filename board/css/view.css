@@ -28,7 +28,11 @@
 }
 
 .text-list {
-  margin-left: 40px;
+  margin-left: 20px;
+}
+.text-list2 {
+  padding: 0;
+  margin-left: 20px;
 }
 
 h3 {
