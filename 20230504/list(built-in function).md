@@ -280,7 +280,8 @@ print("Hello, World!") # Hello, World! 출력
 
 ```
 property(fget=None, fset=None, fdel=None, doc=None)
-fget은 속성 값을 가져오는 함수이고, fset은 속성 값을 설정하는 함수입니다. fdel은 속성 값을 삭제하는 함수이며, doc은 해당 속성에 대한 도움말 문자열(docstring)을 생성합니다.
+fget은 속성 값을 가져오는 함수이고, fset은 속성 값을 설정하는 함수입니다. fdel은 속성 값을 삭제하는 함수이며, 
+doc은 해당 속성에 대한 도움말 문자열(docstring)을 생성합니다.
 ```
 
 ## R
