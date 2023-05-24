@@ -51,3 +51,7 @@ let user = {
 console.log(Object.keys(user));
 console.log(Object.values(user));
 console.log(Object.entries(user));
+// user.keys 이렇게 작동하지 않습니다.
+// why? 여기에 포함시킬 수 없는 결정적인 이유가 있습니다.
+// object를 상속받는 곳이 많습니다.
+// 그래서 map이라는 자료형이 나왔습니다.
