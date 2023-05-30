@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>GET</title>
+
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+    <py-config>
+        [[fetch]]
+        from = './py'
+        files = ['request.py']
+    </py-config>
+</head>
+
+<body>
+    <py-script>
+        import asyncio
+        import json
+        from request import request
+
+        async def main():
+            baseurl = "https://test.api.weniv.co.kr"
+
+            # GET
+            headers = {"Content-type": "application/json"}
+            response = await request(f"{baseurl}/mall", method="GET", headers=headers)
+            print(f"GET request=> status: {response.status}, json: {await response.json()}")
+
+        asyncio.ensure_future(main())
+    </py-script>
+</body>
+</html>
