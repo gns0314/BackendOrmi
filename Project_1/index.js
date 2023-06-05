@@ -150,30 +150,34 @@ const apiPost = async () => {
   }
 };
 
-// submit
 $form.addEventListener("submit", (e) => {
-  e.preventDefault();
+  if ($chatList.querySelectorAll(".answer").length >= 2) {
+    const confirmation = confirm("답변이 가득 찼습니다. 초기화 하시겠습니까?");
 
-  // 버튼을 로딩중 버튼으로 바꿔주는 함수
-  buttonchange();
-  if (additional) {
-    // 추가 질문이 있는 경우
-    $input.value = null;
-    sendQuestion(
-      `너가 위에서 추천해준 ${additional}에 대한 자세한 레시피를 알고싶어`
-    );
-    // 답변 리스트 초기화 여부를 묻는 확인 메시지
+    if (confirmation) {
+      clear(); // 초기화 함수 호출
+    }
   } else {
-    // 추가 질문이 없는 경우
-    ingredient = $input.value;
-    num = document.getElementById("num").value;
-    sendQuestion(
-      `냉장고에 ${ingredient}가 있고 나는 ${cuisineType}을 만들고 싶어 ${ingredient}로 만들 수 있는 ${cuisineType}을 ${num}가지 추천해줘.`
-    );
+    buttonchange();
+    if (additional) {
+      // 추가 질문이 있는 경우
+      $input.value = null;
+      sendQuestion(
+        `너가 위에서 추천해준 ${additional}에 대한 자세한 레시피를 알고싶어`
+      );
+      // 답변 리스트 초기화 여부를 묻는 확인 메시지
+    } else {
+      // 추가 질문이 없는 경우
+      ingredient = $input.value;
+      num = document.getElementById("num").value;
+      sendQuestion(
+        `냉장고에 ${ingredient}가 있고 나는 ${cuisineType}을 만들고 싶어 ${ingredient}로 만들 수 있는 ${cuisineType}을 ${num}가지 추천해줘.`
+      );
+    }
+    printQuestion();
+    apiPost();
   }
-
-  printQuestion();
-  apiPost();
+  e.preventDefault(); // submit 이벤트의 기본 동작 막기
 });
 
 // kakao img api
@@ -195,10 +199,10 @@ function kakaoImgApiInsert() {
       page = 1;
       break;
     case "일식요리":
-      page = 2;
+      page = 3;
       break;
     case "중식":
-      page = 3;
+      page = 15;
       break;
     case "양식요리":
       page = 3;
@@ -262,4 +266,9 @@ function buttonrecovery() {
     subBtn.disabled = false;
     subBtn.innerHTML = "전송";
   }
+}
+
+//초기화 함수
+function clear() {
+  location.reload();
 }
