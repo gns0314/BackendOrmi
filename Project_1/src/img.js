@@ -1,5 +1,5 @@
 import { cuisineType } from "./radio.js";
-
+const API_KEY = config.apikey;
 // kakao img api
 // 이미지 삽입 함수
 export function kakaoImgApiInsert() {
@@ -10,11 +10,11 @@ export function kakaoImgApiInsert() {
   if (foodType === "한식") {
     page = 1;
   } else if (foodType === "일식요리") {
-    page = 3;
+    page = 2;
   } else if (foodType === "중식") {
-    page = 12;
+    page = 14;
   } else if (foodType === "양식요리") {
-    page = 3;
+    page = 2;
   } else {
     page = 1;
   }
@@ -23,7 +23,7 @@ export function kakaoImgApiInsert() {
     type: "GET",
     url: "https://dapi.kakao.com/v2/search/image",
     headers: {
-      Authorization: "KakaoAK 1ae7763bfd5906ae723a040cd42f2538",
+      Authorization: `${API_KEY}`,
     },
     data: {
       query: `${foodType}`,

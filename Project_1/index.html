@@ -15,58 +15,82 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- kakao img api -->
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    
-    </script>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- api-key -->
+    <script src="./src/apikey.js"></script>
   </head>
   <body>
-    <h1 class="text-4xl text-blue-500 border-b-2 border-gray 300 p-5">냉장고 재료로 만들 음식 추천!</h1>
-      <div class="flex items-center">
-        <div class="m-0 flex-1">
-          <h2 class="text-3xl mt-5 ml-7">재료 입력</h2>
-          <form action="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-4/5">
-            <div>
-              <label for="ingredient"  class="block text-gray-700 text-sm font-bold mb-2 text-xl">재료를 적으세요</label>
-              <input
-                type="text"
-                id="ingredient"
-                placeholder="ex) 돼지고기, 파 등등"
-                autofocus
-                class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline mb-4"
-              />
-            </div>
-            <!-- prettier-ignore -->
-            <div>
+    <h1 class="text-4xl text-blue-500 border-b-2 border-gray 300 p-5">
+      냉장고 재료로 만들 음식 추천!
+    </h1>
+    <div class="flex items-center">
+      <div class="m-0 flex-1">
+        <h2 class="text-3xl mt-5 ml-7">재료 입력</h2>
+        <form
+          action="post"
+          class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-4/5"
+        >
+          <div>
+            <label
+              for="ingredient"
+              class="block text-gray-700 text-sm font-bold mb-2 text-xl"
+              >재료를 적으세요</label
+            >
+            <input
+              type="text"
+              id="ingredient"
+              placeholder="ex) 돼지고기, 파 등등"
+              autofocus
+              class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline mb-4"
+            />
+          </div>
+          <!-- prettier-ignore -->
+          <div>
               <p class="block text-gray-700 text-sm font-bold mb-4 text-xl">종류</p>
               <input type="radio" name="type" id="type1" value="한식" checked/><label for="type1" class="text-xl">한식</label>
               <input type="radio" name="type" id="type2" value="일식요리" /><label for="type2" class="text-xl">일식</label>
               <input type="radio" name="type" id="type3" value="중식" /><label for="type3" class="text-xl">중식</label>
               <input type="radio" name="type" id="type4" value="양식요리" /><label for="type4" class="text-xl">양식</label>
             </div>
-            <div>
-              <label for="num"  class="block text-gray-700 text-sm font-bold mb-2 mt-4 text-xl ">추천받을 수</label>
-              <select id="num" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3" selected>3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-            </div>
-            <button type="submit" class = "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full mt-4 mb-4">전송
-            </button>
-            
-          </form>
-        </div>
-        <div id="content" class="flex w-1/2 h-full px-8 pt-6 pb-8 mb-4 ">
+          <div>
+            <label
+              for="num"
+              class="block text-gray-700 text-sm font-bold mb-2 mt-4 text-xl"
+              >추천받을 수</label
+            >
+            <select
+              id="num"
+              class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+            >
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3" selected>3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <button
+            type="submit"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full mt-4 mb-4"
+          >
+            전송
+          </button>
+        </form>
+      </div>
+      <div id="content" class="flex w-1/2 h-full px-8 pt-6 pb-8 mb-4"></div>
+    </div>
+    <div id="sub_title" class="flex">
+      <div class="w-1/2">
+        <p class="block text-gray-700 text-sm font-bold mb-4 text-xl">
+          메뉴 추천
+        </p>
       </div>
     </div>
-          <div id="sub_title" class="flex">
-            <div class="w-1/2">
-              <p class="block text-gray-700 text-sm font-bold mb-4 text-xl">메뉴 추천</p>
-            </div>
-          </div>
-          <ul class="flex flex-wrap">
-          </ul>
+    <ul class="flex flex-wrap"></ul>
   </body>
 </html>
