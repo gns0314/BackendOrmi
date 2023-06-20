@@ -1,7 +1,5 @@
-Project_1/src/apikey.js
-
 django/app/settings.py
-
+Project_1/src/apikey.js
 # Created by https://www.toptal.com/developers/gitignore/api/django
 # Edit at https://www.toptal.com/developers/gitignore?templates=django
 
