@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import View
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
-from .models import Post, Comment
-from .forms import PostForm, CommentForm
+from .models import Post, Comment, HashTag
+from .forms import PostForm, CommentForm, HashTagForm
 from django.urls import reverse_lazy, reverse
 
 # Create your views here.
@@ -92,28 +92,85 @@ class Delete(DeleteView):
 
 class DetailView(View):
     # post_id: 데이터베이스 post_id 테이블 이름을 사용하고 싶어서
-    def get(self, request, post_id): 
+    def get(self, request, pk): 
         # list -> object 상세페이지 -> 상세페이지 하나의 내용
         # pk 값을 왔다갔따, 하나의 인자
 
         # 데이터베이스 방문
         # 해당 글
-        # 장고 ORM (pk)
-        post = Post.objects.get(pk = post_id)
+        # 장고 ORM (pk: 무조건 pk로 작성해야 한다.)
+        post = Post.objects.get(pk = pk)
         # 댓글
-        comments
+        comments = Comment.objects.filter(post=post)
+
+        # 해시태그
+        hashtags = HashTag.objects.filter(post=post)
+
+        # Form
+        comment_form = CommentForm()
+
+        # 태그 Form
+        hashtag_form = HashTagForm()
+
+        context = {
+            'post': post,
+            'comments': comments,
+            'hashtags': hashtags,
+            'comment_form': comment_form,
+            'hashtag_form': hashtag_form
+        }
+        return render(request, 'blog/post_detail.html', context)
 
 ### Comment
 class CommentWrite(View):
     # def get(self, request):
     #     pass
-    def post(self, request, post_id):
+    def post(self, request, pk):
         form = CommentForm(request.POST)
         if form.is_valid():
             # 사용자에게 댓글 내용을 받아옴
             content = form.cleaned_data['content']
             # 해당 아이디에게 해당하는 글 불러옴
-            post = Post.objects.get(pk = post_id)
-            # 댓글 객체 생성
+            post = Post.objects.get(pk = pk)
+            # 댓글 객체 생성, create 메서드를 사용할 때는 save 필요 없음
             comment = Comment.objects.create(post=post, content = content)
-            return redirect('blog:detail', pk=post_id)
+            # commnet = Comment(post=post) -> comment.save()
+            return redirect('blog:detail', pk=pk)
+
+
+class CommentDelte(View):
+    def post(self, request, pk):
+        # 지울 객체를 찾아야 한다. -> 댓글 객체
+        comment = Comment.objects.get(pk=pk)
+        # 상세페이지로 돌아가기
+        post_id = comment.post.id
+        # 삭제
+        comment.delete()
+
+        return redirect('blog:detail', pk = post_id)
+    
+
+### Tag
+class HashTagWrite(View):
+    def post(self, request, pk):
+        form = HashTagForm(request.POST)
+        if form.is_valid():
+            # 사용자에게 댓글 내용을 받아옴
+            name = form.cleaned_data['name']
+            # 해당 아이디에게 해당하는 글 불러옴
+            post = Post.objects.get(pk = pk)
+            # 댓글 객체 생성, create 메서드를 사용할 때는 save 필요 없음
+            hashtag = HashTag.objects.create(post=post, name = name)
+            # commnet = Comment(post=post) -> comment.save()
+            return redirect('blog:detail', pk=pk)
+        
+
+class HashTagDelete(View):
+    def post(self, request, pk):
+        # 지울 객체 찾아야함 -> 해시태그
+        hashtag = HashTag.objects.get(pk=pk)
+        post_id = hashtag.post.id
+        # 삭제
+        hashtag.delete()
+
+        return redirect('blog:detail', pk=post_id)
