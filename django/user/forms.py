@@ -10,13 +10,15 @@ class RegisterForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = UserCreationForm.Meta.fields + ('email',)
+        fields = ['email']
+        # fields = UserCreationForm.Meta.fields + ('email',)
 
 
 class LoginForm(AuthenticationForm):
 
     class Meta:
         model = User
+        fields = ['email', 'password']
         # fields = ['email', 'password']
         # widgets = {
         #     'email': forms.EmailInput(attrs={'placeholder': 'email'}),
