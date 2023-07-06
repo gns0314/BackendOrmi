@@ -1,3 +1,0 @@
-django/app/settings.py
-
-Project_1/src/apikey.js
