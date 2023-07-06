@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.views import View
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from .models import Post, Comment, HashTag
 from .forms import PostForm, CommentForm, HashTagForm
 from django.urls import reverse_lazy, reverse
@@ -183,10 +184,27 @@ class DetailView(View):
         # 해당 글
         # 장고 ORM (pk: 무조건 pk로 작성해야한다.)
         post = Post.objects.get(pk=pk)
+        # # 댓글
+        # comments = Comment.objects.filter(post=post)
+        # # 해시태그
+        # hashtags = HashTag.objects.filter(post=post)
+        # print(post)
+        
         # 댓글
-        comments = Comment.objects.filter(post=post)
+        # comments = Comment.objects.select_related('writer').filter(post=post)
+        # comments = Comment.objects.select_related('writer').filter(post__pk=pk)
+        comments = Comment.objects.select_related('post') # -> comments[0]
+        # comment = Comment.objects.select_related('post').first()
         # 해시태그
-        hashtags = HashTag.objects.filter(post=post)
+        # hashtags = HashTag.objects.select_related('writer').filter(post=post)
+        # hashtags = HashTag.objects.select_related('writer').filter(post__pk=pk)
+        hashtags = HashTag.objects.select_related('post')
+        # print(comments[0].post.title)
+        # for comment in comments:
+        #     print(comment.post)
+        # <QuerySet[]>
+        # value.attr
+        # print(hashtags)
         
         # 댓글 Form
         comment_form = CommentForm()
@@ -196,7 +214,11 @@ class DetailView(View):
         
         context = {
             "title": "Blog",
-            'post': post,
+            'post_id': pk,
+            'post_title': comments[0].post.title,
+            'post_content': comments[0].post.content,
+            'post_writer': comments[0].post.writer,
+            'post_created_at': comments[0].post.created_at,
             'comments': comments,
             'hashtags': hashtags,
             'comment_form': comment_form,
@@ -210,10 +232,16 @@ class DetailView(View):
 class CommentWrite(View):
     # def get(self, request):
     #     pass
+    '''
+    1. LoginRequiredMixin -> 삭제
+    2. 비회원 유저 권환 User
+    '''
     def post(self, request, pk):
         form = CommentForm(request.POST)
         # 해당 아이디에 해당하는 글 불러옴
         post = Post.objects.get(pk=pk)
+        # get 관련 쿼리들은 해당 데이터가 없을 때 오류 발생
+        # get_or_404
         
         if form.is_valid():
             # 사용자에게 댓글 내용을 받아옴
@@ -221,8 +249,22 @@ class CommentWrite(View):
             # 유저 정보 가져오기
             writer = request.user
             # 댓글 객체 생성, create 메서드를 사용할 때는 save 필요 없음
-            comment = Comment.objects.create(post=post, content=content, writer=writer)
-            # comment = Comment(post=post) -> comment.save()
+            try:
+                comment = Comment.objects.create(post=post, content=content, writer=writer)
+                # 생성할 값이 이미 있다면 오류 발생
+                # Unique 값이 중복될 때
+                # 필드 값이 비어있을 때 : ValidationEror
+                # 외래키 관련 데이터비이스 오류 : ObjectDoesNotExist
+                # get_or_create() -> 2가지 경우의 리턴값
+                # comment, created = Comment.objects.get_or_create(post=post, content=content, writer=writer)
+                # if created: print('생성되었습니다') else: print('이미 있습니다')
+                # comment = Comment(post=post) -> comment.save()
+            except ObjectDoesNotExist as e:
+                print('Error occurred', str(e))
+
+            except ValidationError as e:
+                print('Validation error occurred', str(e))
+
             return redirect('blog:detail', pk=pk)
         
         # form.add_error(None, '폼이 유효하지 않습니다.')
@@ -231,7 +273,8 @@ class CommentWrite(View):
         hashtag_form = HashTagForm()
         context = {
             "title": "Blog",
-            'post': post,
+            'post_id': pk,
+            # post.title, post.content...
             'comments': post.comment_set.all(),
             'hashtags': post.hashtag_set.all(),
             'comment_form': form,
@@ -274,7 +317,7 @@ class HashTagWrite(View):
         
         context = {
             'title': 'Blog',
-            'post': post,
+            'post_id': pk,
             'comments': post.comment_set.all(),
             'hashtags': post.hashtag_set.all(),
             'comment_form': comment_form,
