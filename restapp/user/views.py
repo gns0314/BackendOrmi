@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 from django.contrib.auth import authenticate, login, logout
-from .models import User, Profile
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from .models import Profile
 from .forms import RegisterForm, LoginForm
 
 # Create your views here.
@@ -35,9 +35,14 @@ class Registration(View):
         if form.is_valid():
             user = form.save()
             return redirect('user:login')
-
+        context = {
+            'form': form
+        }
+        return render(request, 'user/user_register.html', context)
 
 # Login
+
+
 class Login(View):
     def get(self, request):
         if request.user.is_authenticated:
@@ -99,14 +104,23 @@ class ProfileWrite(APIView):
 
 
 class ProfileUpdate(APIView):
-    def get():
-        pass
+    def get(self, request):
+        profile = Profile.objects.get(user=request.user)
+        serializer = ProfileSerializer(profile)
+        return Response(serializer.data)
 
-    def post():
-        pass
+    def post(self, request):
+        profile = Profile.objects.get(user=request.user)
+        serializer = ProfileSerializer(profile, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ProfileDelete(APIView):
-    def post(self, request,):
+    def post(self, request):
+        # profile - user
         profile = Profile.objects.get(user=request.user)
-        pass
+        profile.delete()
+        return Response({'msg': 'Profile deleted'}, status=status.HTTP_200_OK)
